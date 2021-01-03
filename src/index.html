@@ -5,8 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>goit-js-hw-13-image-finder</title>
+  </head>
 
   <body>
-<h1>Hello!</h1>
+    <main>
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="#" alt="" />
+                <div class="card-body">
+                  <p class="stats-item">
+                    <i class="material-icons">thumb_up</i>
+                    1108
+                  </p>
+                  <p class="stats-item">
+                    <i class="material-icons">visibility</i>
+                    320321
+                  </p>
+                  <p class="stats-item">
+                    <i class="material-icons">comment</i>
+                    129
+                  </p>
+                  <p class="stats-item">
+                    <i class="material-icons">cloud_download</i>
+                    176019
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="py-5 text-center container">
+        <form class="search-form" id="search-form">
+          <input
+            type="text"
+            name="query"
+            autocomplete="off"
+            placeholder="Search images..."
+          />
+        </form>
+        <p>
+          <a href="" class="btn btn-primary my-2">Load more</a>
+        </p>
+      </section>
+    </main>
   </body>
 </html>
