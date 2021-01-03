@@ -1,18 +1,13 @@
-import axiosPixabayApi from './apiService';
 import refs from './refs';
-import debounce from 'lodash.debounce';
 import markupRender from '../templates/markup.hbs';
 
-const debounced = debounce(() => {
-  getResultObj();
-}, 1000);
-
-function getResultObj() {
-  axiosPixabayApi(refs.searchForm.value).then(fullObj => render(fullObj));
+function updatePhotoMarkup(photo) {
+  const markup = markupRender(photo);
+  refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-function render(fullObj) {
-  refs.gallery.insertAdjacentHTML('beforeend', markupRender(fullObj));
+function clearUl() {
+  refs.gallery.innerHTML = '';
 }
 
-refs.searchForm.addEventListener('input', debounced);
+export { updatePhotoMarkup, clearUl };
