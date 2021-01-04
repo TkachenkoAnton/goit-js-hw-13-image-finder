@@ -3,6 +3,10 @@ import refs from './refs';
 import { updatePhotoMarkup, clearUl } from './markup';
 
 function render() {
+  if (apiService.query === '') {
+    refs.loadMoreBtn.classList.add('is-hiden');
+    return;
+  }
   apiService.axiosPixabayApi().then(fullObj => {
     updatePhotoMarkup(fullObj);
     window.scrollTo({
@@ -12,15 +16,20 @@ function render() {
   });
 }
 
-refs.searchForm.addEventListener('submit', e => {
+function submitRender(e) {
   e.preventDefault();
   apiService.resetPage();
   clearUl();
   apiService.query = e.currentTarget.elements.query.value;
+  refs.loadMoreBtn.classList.remove('is-hiden');
   render();
+}
+
+refs.searchForm.addEventListener('submit', e => {
+  submitRender(e);
 });
 
-refs.loadMoreBtn.addEventListener('click', e => {
+refs.loadMoreBtnLink.addEventListener('click', e => {
   e.preventDefault();
   render();
 });

@@ -1,8 +1,8 @@
 const refs = {
   searchForm: document.querySelector('#search-form'),
-  // inputSearchForm: document.querySelector('#search-form'),
+  loadMoreBtn: document.querySelector('#loadMoreBtn'),
   gallery: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('p .btn'),
+  loadMoreBtnLink: document.querySelector('p .btn'),
 };
 
 export default refs;
