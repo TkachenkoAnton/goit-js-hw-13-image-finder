@@ -8,6 +8,7 @@ function render(e) {
     refs.loadMoreBtn.classList.add('is-hiden');
     return;
   }
+
   apiService.axiosPixabayApi().then(fullObj => {
     updatePhotoMarkup(fullObj);
     window.scrollTo({
@@ -15,6 +16,7 @@ function render(e) {
       behavior: 'smooth',
     });
   });
+  refs.loadMoreBtn.classList.remove('is-hiden');
 }
 
 function submitRender(e) {
@@ -22,7 +24,14 @@ function submitRender(e) {
   clearUl();
   apiService.query = e.currentTarget.elements.query.value;
   render(e);
-  refs.loadMoreBtn.classList.remove('is-hiden');
+}
+
+function clickRender(e) {
+  if (refs.inputSearchForm.value === '') {
+    refs.loadMoreBtn.classList.add('is-hiden');
+    return;
+  }
+  render(e);
 }
 
 refs.searchForm.addEventListener('submit', e => {
@@ -30,5 +39,5 @@ refs.searchForm.addEventListener('submit', e => {
 });
 
 refs.loadMoreBtnLink.addEventListener('click', e => {
-  render(e);
+  clickRender(e);
 });
