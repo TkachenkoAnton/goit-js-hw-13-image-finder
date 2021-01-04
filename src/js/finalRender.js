@@ -31,6 +31,11 @@ function clickRender(e) {
     refs.loadMoreBtn.classList.add('is-hiden');
     return;
   }
+  if (apiService.query !== refs.inputSearchForm.value) {
+    apiService.resetPage();
+    clearUl();
+    apiService.query = refs.inputSearchForm.value;
+  }
   render(e);
 }
 
