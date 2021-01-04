@@ -2,7 +2,8 @@ import apiService from './apiService';
 import refs from './refs';
 import { updatePhotoMarkup, clearUl } from './markup';
 
-function render() {
+function render(e) {
+  e.preventDefault();
   if (apiService.query === '') {
     refs.loadMoreBtn.classList.add('is-hiden');
     return;
@@ -17,12 +18,11 @@ function render() {
 }
 
 function submitRender(e) {
-  e.preventDefault();
   apiService.resetPage();
   clearUl();
   apiService.query = e.currentTarget.elements.query.value;
+  render(e);
   refs.loadMoreBtn.classList.remove('is-hiden');
-  render();
 }
 
 refs.searchForm.addEventListener('submit', e => {
@@ -30,6 +30,5 @@ refs.searchForm.addEventListener('submit', e => {
 });
 
 refs.loadMoreBtnLink.addEventListener('click', e => {
-  e.preventDefault();
-  render();
+  render(e);
 });
