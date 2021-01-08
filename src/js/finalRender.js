@@ -1,6 +1,7 @@
 import apiService from './apiService';
 import refs from './refs';
 import { updatePhotoMarkup, clearUl } from './markup';
+import { success, info, error } from './pnotify.js';
 
 function render(e) {
   e.preventDefault();
@@ -24,6 +25,10 @@ function submitRender(e) {
   clearUl();
   apiService.query = e.currentTarget.elements.query.value;
   render(e);
+  success({
+    title: 'Success!',
+    text: 'Look! Cute pictures uploaded!',
+  });
 }
 
 function clickRender(e) {
@@ -37,6 +42,9 @@ function clickRender(e) {
     apiService.query = refs.inputSearchForm.value;
   }
   render(e);
+  info({
+    text: 'More cute pictures uploaded!',
+  });
 }
 
 refs.searchForm.addEventListener('submit', e => {
