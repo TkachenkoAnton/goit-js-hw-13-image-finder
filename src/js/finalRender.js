@@ -10,25 +10,42 @@ function render(e) {
     return;
   }
 
-  apiService.axiosPixabayApi().then(fullObj => {
-    updatePhotoMarkup(fullObj);
-    window.scrollTo({
-      top: document.documentElement.offsetHeight,
-      behavior: 'smooth',
+  apiService
+    .axiosPixabayApi()
+    .then(fullObj => {
+      updatePhotoMarkup(fullObj);
+
+      refs.loadMoreBtn.classList.remove('is-hiden');
+
+      window.scrollTo({
+        top: document.documentElement.offsetHeight,
+        behavior: 'smooth',
+      });
+
+      if (e.type === 'submit') {
+        success({
+          title: 'Success!',
+          text: 'Look! Cute pictures uploaded!',
+        });
+      }
+    })
+    .catch(axiosError => {
+      refs.loadMoreBtn.classList.add('is-hiden');
+      error({
+        title: 'Sorry',
+        text: axiosError,
+      });
     });
-  });
-  refs.loadMoreBtn.classList.remove('is-hiden');
 }
 
 function submitRender(e) {
   apiService.resetPage();
+
   clearUl();
+
   apiService.query = e.currentTarget.elements.query.value;
+
   render(e);
-  success({
-    title: 'Success!',
-    text: 'Look! Cute pictures uploaded!',
-  });
 }
 
 function clickRender(e) {
@@ -36,12 +53,17 @@ function clickRender(e) {
     refs.loadMoreBtn.classList.add('is-hiden');
     return;
   }
+
   if (apiService.query !== refs.inputSearchForm.value) {
     apiService.resetPage();
+
     clearUl();
+
     apiService.query = refs.inputSearchForm.value;
   }
+
   render(e);
+
   info({
     text: 'More cute pictures uploaded!',
   });
